@@ -108,8 +108,8 @@ def create_timed_rotating_log(path):
     logger.setLevel(logging.INFO)
  
     handler = MyTimedRotatingFileHandler(path,
-                                       when="s",
-                                       interval=10,
+                                       when="m",
+                                       interval=2,
                                        backupCount=0)
     
     logger.addHandler(handler)
