@@ -6,11 +6,11 @@ import sys
 import os
 import logging
 
-LOG_FILE = './json_parse.log'
+LOG_FILE = 'json_parse.log'
 JSON_DIR = '/srv/runme/prefix/'
 PREFIX ='proc.txt'
 
-def json_parser(json_lines):
+def parser(json_lines):
     '''
     Parses through each line and writes name and age to /srv/runme/prefix.txt file
     :param json_lines: List of properly formatted json lines
@@ -34,9 +34,9 @@ def json_parser(json_lines):
         except ValueError:
             logging.error('Malformed json in dictionary: {}'.format(d))
 
-    #output_file = os.path.join(JSON_DIR, '{}.txt'.format(PREFIX))
-    output_file = PREFIX
-
+    output_file = os.path.join(JSON_DIR, '{}.txt'.format(PREFIX))
+    #output_file = PREFIX
+    print(output)
     # Remove output file if it exists
     if os.path.exists(output_file):
         os.remove(output_file)
