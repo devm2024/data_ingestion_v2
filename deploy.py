@@ -22,19 +22,16 @@ def deploy(key = 'key/test_key.pem', server_ip = None, prefix = None):
     print('Connected to server')
     
     # Delete folder before cloning
-    stdin, stdout, stderr = client.exec_command('rm -rf data_ingestion_system')
+    stdin, stdout, stderr = client.exec_command('rm -rf data_ingestion_v2')
     # Exeute command to clone repository
     print('Cloning repository')
-    stdin, stdout, stderr = client.exec_command('git clone https://github.com/vinnsvinay/data_ingestion_system')
-    print('Configuring cronjob')
+    stdin, stdout, stderr = client.exec_command('git clone https://github.com/devm2024/data_ingestion_v2.git')
+    print('Running the script')
     # Remove existing cronjobs
-    stdin, stdout, stderr = client.exec_command('crontab -r')
-    # Adding a crontab
-    stdin, stdout, stderr = client.exec_command('crontab -l > json_cron')
-    cron_command = 'echo "*/5 * * * * python /home/testtest/data_ingestion_system/json_parser.py {}" \
-                            >> json_cron'.format(prefix)
-    stdin, stdout, stderr = client.exec_command(cron_command)
-    stdin, stdout, stderr = client.exec_command('crontab json_cron')
-    print('Running cronjob')
+    stdin, stdout, stderr = client.exec_command('cd data_ingestion_v2')
+    
+    stdin, stdout, stderr = client.exec_command('python /home/testtest/data_ingestion_v2/data_server.py {}'.format(prefix))
+    
+    print('Script Running')
 
     return None
