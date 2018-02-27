@@ -133,5 +133,5 @@ if __name__ == '__main__':
     log_loc = os.path.join(JSON_DIR, given_prefix)
     log_loc = os.path.join(log_loc, LOG_FILE)
     logger= create_timed_rotating_log(log_loc)
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
     
