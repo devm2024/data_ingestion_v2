@@ -3,7 +3,7 @@
 
 import paramiko
 
-def deploy(key = 'key/test_key.pem', server_ip = None, prefix = None):
+def deploy(key = 'datav2.pem', server_ip = None, prefix = None):
     '''
     key - ssh key to login into the server
     server_ip - ip address of the server
@@ -35,3 +35,5 @@ def deploy(key = 'key/test_key.pem', server_ip = None, prefix = None):
     print('Script Running')
 
     return None
+
+deploy(key = 'test.pem', server_ip = '54.213.99.92', prefix = 'bhai')

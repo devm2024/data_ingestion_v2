@@ -12,7 +12,6 @@ import sys
 import json
 from logging.handlers import TimedRotatingFileHandler
 from threading import Thread
-from json_parser import parser
 import os
 import time
 from threading import Thread
