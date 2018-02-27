@@ -90,11 +90,6 @@ def parser(json_lines):
     out_folder = os.path.join(JSON_DIR, given_prefix)
     output_file = os.path.join(out_folder, OUT_FILE_NAME)
 
-    print(output)
-    # Remove output file if it exists
-    if os.path.exists(output_file):
-        os.remove(output_file)
-        logging.info('Removed output file')
 
     with open(output_file, 'w+') as f:
         for name, age in output:
