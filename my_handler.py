@@ -8,6 +8,7 @@ Created on Mon Feb 26 16:25:38 2018
 import glob
 from logging.handlers import TimedRotatingFileHandler
 from threading import Thread
+from json_parser import json_parser
 
 
 def process_file(file_name):
@@ -20,8 +21,7 @@ def process_file(file_name):
         print('ReadingFile', file_to_read)
         with open(file_to_read, 'r') as f:
             json_list = f.readlines()
-            for i in json_list:
-                print i
+            json_parser(json_list)
     
     
     

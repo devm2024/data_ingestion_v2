@@ -16,7 +16,8 @@ import json
 from logging.handlers import TimedRotatingFileHandler
 app = Flask(__name__) #create the Flask app
 from my_handler import MyTimedRotatingFileHandler
-
+#LOG_FILE='/srv/runme/prefix/Raw.txt'
+LOG_FILE='Raw.txt'
 
         
 def create_timed_rotating_log(path):
@@ -34,9 +35,7 @@ def create_timed_rotating_log(path):
     logger.addHandler(handler)
     return logger
 
-
-log_file = "Raw.txt"
-logger= create_timed_rotating_log(log_file)
+logger= create_timed_rotating_log(LOG_FILE)
 
         
 @app.route('/submit',methods = ['POST'])

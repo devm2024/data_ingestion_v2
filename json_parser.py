@@ -7,35 +7,10 @@ import os
 import logging
 
 LOG_FILE = './json_parse.log'
-JSON_DIR = '/srv/runme/'
+JSON_DIR = '/srv/runme/prefix/'
+PREFIX ='proc.txt'
 
-
-def read_json_files(prefix):
-    '''
-    Reads files starting with prefix in JSON_DIR and returns properly formatted json lines
-    :param prefix: keyword used to subset files
-    :return: formatted json lines
-    '''
-    json_lines = list()
-    files = os.listdir(JSON_DIR)
-    for f in files:
-        if f.startswith(prefix):
-            try:
-                file_loc = os.path.join(JSON_DIR, f)
-                fd = open(file_loc)
-                for line in fd.readlines():
-                    d = json.loads(line)
-                    json_lines.append(d)
-            except IOError:
-                logging.error('Cannot open file: {}'.format(file_loc))
-            except ValueError:
-                logging.error('Malformed json in file: {}'.format(file_loc))
-
-    logging.info('Successfully read {} json lines'.format(len(json_lines)))
-    return json_lines
-
-
-def json_parser(prefix, json_lines):
+def json_parser(json_lines):
     '''
     Parses through each line and writes name and age to /srv/runme/prefix.txt file
     :param json_lines: List of properly formatted json lines
@@ -59,7 +34,8 @@ def json_parser(prefix, json_lines):
         except ValueError:
             logging.error('Malformed json in dictionary: {}'.format(d))
 
-    output_file = os.path.join(JSON_DIR, '{}.txt'.format(prefix))
+    #output_file = os.path.join(JSON_DIR, '{}.txt'.format(PREFIX))
+    output_file = PREFIX
 
     # Remove output file if it exists
     if os.path.exists(output_file):
@@ -72,14 +48,3 @@ def json_parser(prefix, json_lines):
             f.write(entry)
         logging.info('Parsed all files succesfully')
     return None
-
-
-# Read input argument and execute parser function
-if __name__ == '__main__':
-    logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
-    if len(sys.argv) != 2:
-        print("Malformed python call. Correct call is 'python json_parser.py prefix'")
-        sys.exit()
-    prefix = sys.argv[1]
-    json_lines = read_json_files(prefix)
-    json_parser(prefix, json_lines)
