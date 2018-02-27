@@ -22,7 +22,8 @@ from logging.handlers import TimedRotatingFileHandler
 app = Flask(__name__) #create the Flask app
 LOG_FILE='Raw.txt'
 OUT_FILE_NAME = 'proc.txt'
-JSON_DIR = '/Users/deveshmaheshwari/Documents/Bigdatabusiness_stategy/dataingest_v2/datav2'
+#JSON_DIR = '/Users/deveshmaheshwari/Documents/Bigdatabusiness_stategy/dataingest_v2/datav2'
+JSON_DIR = '/srv/runme'
 given_prefix='prefix'
 
 def process_file(file_name):
