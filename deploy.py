@@ -3,16 +3,18 @@
 
 import paramiko
 
+
 def deploy(key = 'test.pem', server_ip = None, prefix = None):
-    '''
-    key - ssh key to login into the server
-    server_ip - ip address of the server
-    prefix - prefix of the associated file
-    '''
+    """Deploys the server
+    key: ssh key to login into the server
+    server_ip: ip address of the server
+    prefix: prefix of the associated file
+    """
     # Create a client object
     client = paramiko.client.SSHClient()
     # Autoaddkey if not available
     client.set_missing_host_key_policy(paramiko.client.AutoAddPolicy())
+
     # Connect to the server
     try:
         client.connect(server_ip, pkey = paramiko.RSAKey.from_private_key_file(key), username='testtest')
@@ -27,11 +29,10 @@ def deploy(key = 'test.pem', server_ip = None, prefix = None):
     print('Cloning repository')
     stdin, stdout, stderr = client.exec_command('git clone https://github.com/devm2024/data_ingestion_v2.git')
     print('Running the script')
+    
     # Remove existing cronjobs
     stdin, stdout, stderr = client.exec_command('cd data_ingestion_v2')
-    
     stdin, stdout, stderr = client.exec_command('python data_server.py {}'.format(prefix))
-    
     print('Script Running')
 
     return None
