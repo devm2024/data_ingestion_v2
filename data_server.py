@@ -90,8 +90,7 @@ def parser(json_lines):
     out_folder = os.path.join(JSON_DIR, given_prefix)
     output_file = os.path.join(out_folder, OUT_FILE_NAME)
 
-
-    with open(output_file, 'w+') as f:
+    with open(output_file, 'a+') as f:
         for name, age in output:
             entry = name + '\t' + str(age) + '\n'
             f.write(entry)
