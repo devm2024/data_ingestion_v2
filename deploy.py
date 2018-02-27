@@ -28,13 +28,20 @@ def deploy(key = 'test.pem', server_ip = None, prefix = None):
     # Exeute command to clone repository
     print('Cloning repository')
     stdin, stdout, stderr = client.exec_command('git clone https://github.com/devm2024/data_ingestion_v2.git')
-    print('Running the script')
+    print(stderr.read())
+    
+    
+    
     
     # Remove existing cronjobs
     stdin, stdout, stderr = client.exec_command('cd data_ingestion_v2')
-    stdin, stdout, stderr = client.exec_command('python data_server.py {} &'.format(prefix))
+    print(stderr.read())
+    print('Running the script')
+    
+    stdin, stdout, stderr = client.exec_command('python /home/testtest/data_ingestion_v2/data_server.py {} &'.format(prefix))
+    print(stderr.read())
     print('Script Running')
 
     return None
 
-deploy(key = 'test.pem', server_ip = 'ec2-54-201-217-31.us-west-2.compute.amazonaws.com', prefix = 'bhai')
+deploy(key = 'test.pem', server_ip = 'ec2-34-212-0-52.us-west-2.compute.amazonaws.com', prefix = 'bhai')
