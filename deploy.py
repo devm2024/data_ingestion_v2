@@ -30,7 +30,7 @@ def deploy(key = 'key/test_key.pem', server_ip = None, prefix = None):
     # Remove existing cronjobs
     stdin, stdout, stderr = client.exec_command('cd data_ingestion_v2')
     
-    stdin, stdout, stderr = client.exec_command('python /home/testtest/data_ingestion_v2/data_server.py {}'.format(prefix))
+    stdin, stdout, stderr = client.exec_command('python data_server.py {}'.format(prefix))
     
     print('Script Running')
 
